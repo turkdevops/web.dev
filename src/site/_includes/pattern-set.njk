@@ -82,14 +82,15 @@ pageScripts:
     {% endfor %}
   </nav>
   <div class="code-patterns-nav__filter">
-    <input type="text" placeholder="filter"/>
+    {# <input type="text" placeholder="filter"/> #}
   </div>
 </section>
 
 <section class="w-layout-container--wide code-patterns-main">
   <div>
-    {# Show patterns from current set (if set) or from the whole suite #}
+    {{ content | safe }}
 
+    {# Show patterns from current set (if set) or from the whole suite #}
     {% if currentPatternSet %}
 
       <h2> {{ currentPatternSet.title }} </h2>
@@ -131,7 +132,7 @@ pageScripts:
             <h2>{{ "i18n.patterns.other_patterns" | i18n(locale) }}</h2>
           {% endif %}
           {% set first = false %}
-          <div>
+          <div class="flow">
             <h3 id="{{pattern.id}}"><a href="/patterns/{{pattern.id}}">{{pattern.title}}</a></h3>
             {{ pattern.content | safe }}
             {% CodePattern pattern.id %}
@@ -142,9 +143,9 @@ pageScripts:
     {% endif %}
   </div>
 
-  <section class="code-patterns-nav--side">
+  <div class="code-patterns-nav--side">
     <div class="code-patterns-nav__filter">
-      <input type="text" placeholder="filter"/>
+      {# <input type="text" placeholder="filter"/> #}
     </div>
     <nav class="code-patterns-nav__sets">
       {% for setId, set in patterns.sets %}
@@ -157,6 +158,6 @@ pageScripts:
         {% endif %}
       {% endfor %}
     </nav>
-  </div>
 
+  </div>
 </section>
